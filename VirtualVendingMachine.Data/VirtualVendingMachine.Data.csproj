@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AddProductCommand.cs" />
     <Compile Include="DBContext\BaseDbContext.cs" />
     <Compile Include="DBContext\VendingMachineDbContext.cs" />
     <Compile Include="DBContext\VendingMachineDbContextInitializer.cs" />
@@ -64,9 +65,7 @@
     <Compile Include="Queries\GetTotalBalanceQuery.cs" />
     <Compile Include="VendingMachineMediator.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
