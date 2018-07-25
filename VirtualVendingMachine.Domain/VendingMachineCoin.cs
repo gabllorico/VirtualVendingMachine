@@ -5,6 +5,10 @@ namespace VirtualVendingMachine.Domain
     {
         public Currency Currency { get; set; }
         public int Pieces { get; set; }
-        public decimal TotalAmount => Currency.Value * Pieces;
+
+        public decimal TotalAmount
+        {
+            get { return Currency.Value*Pieces; }
+        }
     }
 }
