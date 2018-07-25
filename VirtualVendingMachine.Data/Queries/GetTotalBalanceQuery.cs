@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using ShortBus;
 using VirtualVendingMachine.Data.DBContext;
 
@@ -19,9 +20,15 @@ namespace VirtualVendingMachine.Data.Queries
 
         public decimal Handle(GetTotalBalanceQuery request)
         {
-            var y = _dbContext.VendingMachineCoins.ToList();
-            decimal x = 1;
-            return x;
+            var coinsInVending = _dbContext.VendingMachineCoins.Include(x => x.Currency).ToList();
+            decimal totalAmount = 0;
+
+            foreach (var coinInVending in coinsInVending)
+            {
+                totalAmount = totalAmount + coinInVending.TotalAmount;
+            }
+
+            return totalAmount;
         }
     }
 }

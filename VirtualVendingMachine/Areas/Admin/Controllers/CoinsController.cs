@@ -16,7 +16,7 @@ namespace VirtualVendingMachine.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var model = _mediator.Request(new GetTotalBalanceQuery());
-            return View(model);
+            return View(model.Data);
         }
 
         public JsonResult AddCoins()
