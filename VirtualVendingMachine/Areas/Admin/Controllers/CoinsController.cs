@@ -40,5 +40,18 @@ namespace VirtualVendingMachine.Areas.Admin.Controllers
                 TempData["NotificationMessage"] = "Something Went Wrong With Adding of Coins";
             return RedirectToAction("Index");
         }
+
+        public ActionResult EmptyVendingMachine()
+        {
+            _mediator.Request(new EmptyCoinsInVendingMachineCommand());
+            
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult CoinStockList()
+        {
+            var request = _mediator.Request(new GetCoinsLeftInVendingMachineQuery());
+            return PartialView("_CoinStockListPartial", request.Data);
+        }
     }
 }

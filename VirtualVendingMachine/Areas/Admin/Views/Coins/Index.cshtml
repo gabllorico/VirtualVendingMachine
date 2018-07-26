@@ -9,11 +9,38 @@
 </h2>
 
 <hr/>
+
+
+    @{ Html.RenderAction("CoinStockList", "Coins", new {area = "Admin"}); }
+
 <div class="row form-group">
-    <a class="btn btn-info">Withdraw Coins</a>
+    <button onclick="emptyVendingMachine()" class="btn btn-info">Withdraw Coins</button>
 
 </div>
 
 <div class="row">
     <a href="@Url.Action("AddCoins","Coins")" class="btn btn-info">Add Coins</a>
 </div>
+
+<script>
+    function emptyVendingMachine() {
+        $.ajax({
+            url: '@Url.Action("EmptyVendingMachine", "Coins")',
+            type: 'POST',
+            success: function(data) {
+                $("body").html(data);
+                toastr.success("Successfully Withdrawn Money");
+            }
+
+        });
+    };
+        @if (TempData["NotificationMessage"] != null)
+        {
+            <text>
+                document.addEventListener("DOMContentLoaded", function(event){
+
+                    toastr.success('@TempData["NotificationMessage"].ToString()');
+                })
+            </text>
+        }
+</script>

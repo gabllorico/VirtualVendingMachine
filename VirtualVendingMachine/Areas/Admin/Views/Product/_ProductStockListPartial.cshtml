@@ -1,0 +1,7 @@
+﻿@model VirtualVendingMachine.Data.DTO.ProductsLeftWithPortionDto
+@for (var i = 0; i < Model.Products.Count; i++)
+{
+    <div class="row form-group">
+        <label class="col-md-12"><i class="fa fa-plus-circle">@Model.Products[i].ProductName</i> remaining : @Model.Products[i].Portion</label>
+    </div>
+}

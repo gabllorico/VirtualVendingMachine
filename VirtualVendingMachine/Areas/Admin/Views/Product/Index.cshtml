@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title ="Products";
+}
+
+<h2>Product Management</h2>
+
+<hr />
+
+
+@{ Html.RenderAction("ProductStockList", "Product", new { area = "Admin" }); }
+
+<div class="row">
+    <a href="@Url.Action("AddProducts","Product")" class="btn btn-info">Add Products</a>
+</div>
+
+<script>
+        @if (TempData["NotificationMessage"] != null)
+        {
+            <text>
+                document.addEventListener("DOMContentLoaded", function(event){
+
+                    toastr.success('@TempData["NotificationMessage"].ToString()');
+                })
+            </text>
+        }
+</script>

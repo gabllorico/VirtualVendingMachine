@@ -36,7 +36,6 @@ namespace VirtualVendingMachine.Controllers
             {
                 CoinsInserted = dto
             });
-
             return View(request.Data);
         }
 
@@ -44,6 +43,18 @@ namespace VirtualVendingMachine.Controllers
         {
             var request = _mediator.Request(new GetCoinsForInsertQuery());
             return PartialView("_CoinListPartial", request.Data);
+        }
+
+        public ActionResult CoinBack([FromBody] List<CoinInsertedDto> dto)
+        {
+            var request = _mediator.Request(new CoinBackCommand
+            {
+                CoinsInserted = dto
+            });
+
+            TempData["CoinBack"] = request.Data;
+
+            return RedirectToAction("VendingMachine", new {dto = new List<CoinInsertedDto>()});
         }
 
         public ActionResult OrderVendingMachineProduct(int vendingMachineProductId, decimal totalAmountInserted)
@@ -54,7 +65,7 @@ namespace VirtualVendingMachine.Controllers
                 AmountInserted = totalAmountInserted
             });
 
-
+            TempData["NotificationMessage"] = "Success";
             TempData["CoinChange"] = request.Data;
             return RedirectToAction("VendingMachine", new {dto = new List<CoinInsertedDto>()});
         }

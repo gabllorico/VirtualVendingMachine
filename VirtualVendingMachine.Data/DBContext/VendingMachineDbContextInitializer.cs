@@ -62,7 +62,7 @@ namespace VirtualVendingMachine.Data.DBContext
             var chickenSoupVending = new VendingMachineProduct
             {
                 Price = (decimal) 1.80,
-                Portion = 10,
+                Portion = 15,
                 Product = chickenSoup
             };
 

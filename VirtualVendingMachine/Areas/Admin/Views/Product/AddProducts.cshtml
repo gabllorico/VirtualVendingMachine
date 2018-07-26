@@ -1,0 +1,27 @@
+﻿@model VirtualVendingMachine.Data.DTO.ProductsWithPortionToBeAddedDto
+@{
+    ViewBag.Title = "Add Products";
+}
+@using (Html.BeginForm("Add", "Product", FormMethod.Post, new { dto = Model }))
+{
+    <h2>Add Products</h2>
+
+    for (var i = 0; i < Model.Products.Count; i++)
+    {
+        @Html.HiddenFor(m => Model.Products[i].ProductId)
+        <div class="row form-group">
+            <label class="col-md-3">
+                @Model.Products[i].ProductName :
+            </label>
+            <label class="col-md-1">Portion</label>
+            @Html.EditorFor(m => Model.Products[i].Portion, new { htmlAttributes = new { @class = "col-md-1" } })
+            <label class="col-md-2">Price<i class="fa fa-eur"></i></label>
+            
+            @Html.EditorFor(m => Model.Products[i].Price, new { htmlAttributes = new { @class = "col-md-1" } })
+        </div>
+    }
+    <div class="btn-group">
+        <input type="submit" class="btn btn-default" value="Save" />
+        <a class="btn btn-default" href="@Url.Action("Index", "Product", new {area = "Admin"})">Cancel</a>
+    </div>
+}

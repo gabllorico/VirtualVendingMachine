@@ -228,7 +228,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CoinsController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -298,12 +298,14 @@
     </Content>
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Coins\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Coins\AddCoins.cshtml" />
-    <Content Include="Areas\Admin\Views\Products\AddProducts.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\AddProducts.cshtml" />
+    <Content Include="Areas\Admin\Views\Coins\_CoinStockListPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\_ProductStockListPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -330,6 +332,7 @@
     <Content Include="Views\VendingMachine\_CoinListPartial.cshtml" />
     <Content Include="Views\VendingMachine\_ChangeListPartial.cshtml" />
     <Content Include="Views\Home\ReadMe.cshtml" />
+    <Content Include="Views\VendingMachine\_CoinBackPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtualVendingMachine.Data\VirtualVendingMachine.Data.csproj">

@@ -1,7 +1,14 @@
 ﻿@model VirtualVendingMachine.Data.DTO.ProductsAvailableDto
 @{
     ViewBag.Title = "VendingMachine";
-    
+
+}
+
+@{
+
+
+
+
 }
 
 <h2>Vending Machine</h2>
@@ -38,7 +45,10 @@
 </div>
 
 <div class="row">
-    <label>Amount : </label><label>@Model.TotalAmountInserted</label>
+    <div class="col-md-3">
+        <label>Amount : </label><label>@Model.TotalAmountInserted</label>
+    </div>
+    <button onclick="takeBackCoins()" class="btn btn-default col-md-2">Take Back Coins</button>
 </div>
 
 @if (TempData["CoinChange"] != null)
@@ -46,6 +56,11 @@
     Html.RenderPartial("_ChangeListPartial", TempData["CoinChange"]);
 }
 
+
+@if (TempData["CoinBack"] != null)
+{
+    Html.RenderPartial("_CoinBackPartial", TempData["CoinBack"]);
+}
 @{ Html.RenderAction("CoinListPartial"); }
 
 <script>
@@ -89,6 +104,7 @@
                     },
                     success: function (data) {
                         $("body").html(data);
+
                     }
                 });
             } else {
@@ -104,7 +120,7 @@
                     data: {
                         dto: coinsInserted
                     },
-                    success: function (data) {
+                    success: function(data) {
                         $("body").html(data);
                     }
                 });
@@ -122,6 +138,42 @@
             }
         }
         return -1;
+    }
+
+    function takeBackCoins() {
+        if (coinsInserted.length != 0) {
+            $.ajax({
+                url: '@Url.Action("CoinBack", "VendingMachine")',
+                type: 'POST',
+                data: {
+                    dto: coinsInserted
+                },
+                success: function(data) {
+                    $("body").html(data);
+                }
+            });
+        } else {
+            $.ajax({
+                url: '@Url.Action("VendingMachine", "VendingMachine")',
+                type: 'POST',
+                data: {
+                    dto: coinsInserted
+                },
+                success: function(data) {
+                    $("body").html(data);
+                }
+            });
+        }
+    }
+
+    @if (TempData["NotificationMessage"] != null && TempData["NotificationMessage"].ToString() == "Success")
+    {
+        <text>
+            document.addEventListener("DOMContentLoaded", function(event){
+
+                toastr.success('Thank You');
+            })
+        </text>
     }
 
 </script>
