@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using ShortBus;
+using VirtualVendingMachine.Data.Commands;
 using VirtualVendingMachine.Data.DTO;
 using VirtualVendingMachine.Data.Queries;
 
@@ -43,6 +44,19 @@ namespace VirtualVendingMachine.Controllers
         {
             var request = _mediator.Request(new GetCoinsForInsertQuery());
             return PartialView("_CoinListPartial", request.Data);
+        }
+
+        public ActionResult OrderVendingMachineProduct(int vendingMachineProductId, decimal totalAmountInserted)
+        {
+            var request = _mediator.Request(new OrderProductCommand
+            {
+                VendingMachineProductId = vendingMachineProductId,
+                AmountInserted = totalAmountInserted
+            });
+
+
+            TempData["CoinChange"] = request.Data;
+            return RedirectToAction("VendingMachine", new {dto = new List<CoinInsertedDto>()});
         }
     }
 }

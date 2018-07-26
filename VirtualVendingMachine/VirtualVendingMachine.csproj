@@ -325,6 +325,7 @@
     <Content Include="Views\VendingMachine\Index.cshtml" />
     <Content Include="Views\VendingMachine\VendingMachine.cshtml" />
     <Content Include="Views\VendingMachine\_CoinListPartial.cshtml" />
+    <Content Include="Views\VendingMachine\_ChangeListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtualVendingMachine.Data\VirtualVendingMachine.Data.csproj">

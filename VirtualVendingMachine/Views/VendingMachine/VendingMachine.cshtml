@@ -15,6 +15,7 @@
                     <div class="panel-heading">
                         @Model.ProductsAvailable[i].ProductName
                         <i class="fa fa-eur">@Model.ProductsAvailable[i].Price</i>
+                        <button class="btn btn-warning disabled"><i class="fa fa-times"></i></button>
                     </div>
                 </div>
             </div>
@@ -26,6 +27,7 @@
                     <div class="panel-heading">
                         @Model.ProductsAvailable[i].ProductName
                         <i class="fa fa-eur">@Model.ProductsAvailable[i].Price</i>
+                        <a href="@Url.Action("OrderVendingMachineProduct", "VendingMachine", new { vendingMachineProductId = Model.ProductsAvailable[i].VendingMachineProductId, totalAmountInserted  = Model.TotalAmountInserted })" class="btn btn-warning"><i class="fa fa-check"></i></a>
                     </div>
                 </div>
             </div>
@@ -37,15 +39,19 @@
     <label>Amount : </label><label>@Model.TotalAmountInserted</label>
 </div>
 
+@if (TempData["CoinChange"] != null)
+{
+    Html.RenderPartial("_ChangeListPartial", TempData["CoinChange"]);
+}
+
 @{ Html.RenderAction("CoinListPartial"); }
 
 <script>
     var coinsInserted =[];
 
-    @foreach (var d in Model.CoinsInserted)
-    {
-        @:coinsInserted.push(@d);
-    }
+    var array = @Html.Raw(Json.Encode(Model.CoinsInserted));
+    coinsInserted = array;
+
 
     function insertCoin(currencyId) {
         var count = coinsInserted.length;
@@ -62,7 +68,11 @@
                 type: 'POST',
                 data: {
                     dto : coinsInserted
+                },
+                success: function(data) {
+                    $("body").html(data);
                 }
+
             });
         } else {
             var index = findIndex(currencyId);
@@ -74,6 +84,9 @@
                     type: 'POST',
                     data: {
                         dto: coinsInserted
+                    },
+                    success: function (data) {
+                        $("body").html(data);
                     }
                 });
             } else {
@@ -88,13 +101,16 @@
                     type: 'POST',
                     data: {
                         dto: coinsInserted
+                    },
+                    success: function (data) {
+                        $("body").html(data);
                     }
                 });
             }
 
         }
     }
-    
+
     function findIndex(currencyId) {
         var i = 0;
         var count = coinsInserted.length;

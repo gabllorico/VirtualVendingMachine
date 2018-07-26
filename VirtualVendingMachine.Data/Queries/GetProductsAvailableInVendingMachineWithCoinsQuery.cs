@@ -4,7 +4,7 @@ using System.Linq;
 using ShortBus;
 using VirtualVendingMachine.Data.DBContext;
 using VirtualVendingMachine.Data.DTO;
-using VirtualVendingMachine.Domain;
+using VirtualVendingMachine.Data.Helper;
 
 namespace VirtualVendingMachine.Data.Queries
 {
