@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AddCoinsCommand.cs" />
     <Compile Include="Commands\AddProductCommand.cs" />
     <Compile Include="Commands\OrderProductCommand.cs" />
     <Compile Include="DBContext\BaseDbContext.cs" />
@@ -65,10 +66,12 @@
     <Compile Include="DTO\CoinChangeDto.cs" />
     <Compile Include="DTO\CoinDto.cs" />
     <Compile Include="DTO\CoinInsertedDto.cs" />
+    <Compile Include="DTO\CoinWithPiecesDto.cs" />
     <Compile Include="DTO\ProductAvailableDto.cs" />
     <Compile Include="Helper\ChangeHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\GetCoinsForInsertQuery.cs" />
+    <Compile Include="Queries\GetCoinsForMachineQuery.cs" />
     <Compile Include="Queries\GetProductsAvailableInVendingMachineWithCoinsQuery.cs" />
     <Compile Include="Queries\GetTotalBalanceQuery.cs" />
     <Compile Include="VendingMachineMediator.cs" />

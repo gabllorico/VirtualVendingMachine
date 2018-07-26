@@ -3,7 +3,17 @@
 @for (var i = 0; i < Model.CoinChanges.Count; i++)
 {
     <div class="row form-group">
-        <i class="fa fa-eur">@Model.CoinChanges[i].CurrencyName @Model.CoinChanges[i].Total @Model.CoinChanges[i].Value</i>
+        <i class="fa fa-eur col-md-12">@Model.CoinChanges[i].CurrencyName</i>
+        <i class="fa fa-eur col-md-12">@Model.CoinChanges[i].Value</i>
+        <i class="fa col-md-12">Pieces : @Model.CoinChanges[i].Pieces</i>
+        <i class="fa fa-eur col-md-12">Pieces : @Model.CoinChanges[i].Total</i>
+
     </div>
 
+
 }
+<div class="row form-group"><label>
+        Total Change: 
+    </label>
+    <i class="fa fa-eur">@Model.TotalChange</i>
+</div>

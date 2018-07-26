@@ -8,6 +8,7 @@ namespace VirtualVendingMachine.Data.DTO
         public string ProductName { get; set; }
         public decimal Price { get; set; }
         public bool Available { get; set; }
+        public string Message { get; set; }
     }
     public class ProductsAvailableDto
     {

@@ -25,7 +25,7 @@ namespace VirtualVendingMachine.Data.Queries
 
         public ProductsAvailableDto Handle(GetProductsAvailableInVendingMachineWithCoinsQuery request)
         {
-            decimal price = 0;
+            decimal insertedMoney = 0;
             if (request.CoinsInserted == null)
             {
                 request.CoinsInserted = new List<CoinInsertedDto>();
@@ -44,7 +44,7 @@ namespace VirtualVendingMachine.Data.Queries
                 {
                     var currency = _dbContext.Currencies.First(x => x.Id == coinInserted.CurrencyId);
                     var amount = currency.Value;
-                    price = price + (amount*coinInserted.Pieces);
+                    insertedMoney = insertedMoney + (amount*coinInserted.Pieces);
                     productsDisplay.CoinsInserted.Add(new CoinInsertedDto
                     {
                         CurrencyId = coinInserted.CurrencyId,
@@ -56,7 +56,7 @@ namespace VirtualVendingMachine.Data.Queries
                     currencyInVendingMachine.Pieces = currencyInVendingMachine.Pieces + coinInserted.Pieces;
                 }
 
-                productsDisplay.TotalAmountInserted = price;
+                productsDisplay.TotalAmountInserted = insertedMoney;
 
                 _dbContext.SaveChanges();
             }
@@ -73,14 +73,25 @@ namespace VirtualVendingMachine.Data.Queries
                     VendingMachineProductId = vendingMachineProduct.Id
                 };
 
-                if (vendingMachineProduct.Portion != 0 && vendingMachineProduct.Price <= price)
+                if (vendingMachineProduct.Portion != 0 && vendingMachineProduct.Price <= insertedMoney && new ChangeHelper().CanGiveChange(insertedMoney, vendingMachineProduct.Id))
                 {
                     product.Available = true;
+                    product.Message = "Available";
                 }
 
                 else
                 {
+
                     product.Available = false;
+                    
+                    if (vendingMachineProduct.Portion == 0)
+                        product.Message = "Not Available";
+
+                    if (vendingMachineProduct.Price > insertedMoney)
+                        product.Message = "Insufficient Amount";
+
+                    if (new ChangeHelper().CanGiveChange(insertedMoney, vendingMachineProduct.Id))
+                        product.Message = "Cannot Give Change";
                 }
 
                 productsDisplay.ProductsAvailable.Add(product);

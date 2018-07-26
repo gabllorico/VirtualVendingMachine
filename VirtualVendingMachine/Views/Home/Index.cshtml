@@ -12,11 +12,11 @@
     <div class="col-md-4">
         <h2>As Admin</h2>
         <p>Add New Product/Edit Price/Add Coins</p>
-        <p><a class="btn btn-default" href="@Url.Action("Index", "Coins")">Go To Admin</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Dashboard", new { Area = "Admin" })">Go To Admin</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
+        <h2>READ ME</h2>
+        <p>What could have been implemented if more time</p>
+        <p><a class="btn btn-default" href="@Url.Action("ReadMe", "Home")">Go to READ ME</a></p>
     </div>
 </div>

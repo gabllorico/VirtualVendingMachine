@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using ShortBus;
+using VirtualVendingMachine.Data.DTO;
 using VirtualVendingMachine.Data.Queries;
 
 namespace VirtualVendingMachine.Areas.Admin.Controllers
@@ -19,9 +20,16 @@ namespace VirtualVendingMachine.Areas.Admin.Controllers
             return View(model.Data);
         }
 
-        public JsonResult AddCoins()
+        public ActionResult AddCoins()
         {
-            return new JsonResult();
+            var request = _mediator.Request(new GetCoinsForMachineQuery());
+            return View(request.Data);
+        }
+
+        public ActionResult Add(CoinsWithPiecesDto dto)
+        {
+            var x = dto;
+            return RedirectToAction("Index");
         }
     }
 }

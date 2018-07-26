@@ -1,0 +1,21 @@
+﻿@model VirtualVendingMachine.Data.DTO.CoinsWithPiecesDto
+@{
+    ViewBag.Title = "AddCoins";
+}
+@using (Html.BeginForm("Add", "Coins", FormMethod.Post, new {dto = Model}))
+{
+    <h2>Add Coins</h2>
+
+ for (var i = 0; i < Model.Coins.Count; i++)
+ {
+     @Html.HiddenFor(m => Model.Coins[i].CurrencyId)
+     <div class="row form-group">
+         <label class="col-md-3">
+             @Model.Coins[i].CurrencyName :
+         </label>
+
+         <input type="text" value="@Model.Coins[i].Pieces" class="form-control col-md-1"/>
+     </div>
+ }
+ <input type="submit" class="btn btn-default" value="Save"/>
+}

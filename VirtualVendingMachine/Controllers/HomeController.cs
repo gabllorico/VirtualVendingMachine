@@ -19,5 +19,10 @@ namespace VirtualVendingMachine.Controllers
 
             return View();
         }
+
+        public ActionResult ReadMe()
+        {
+            return View();
+        }
     }
 }

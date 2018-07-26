@@ -15,6 +15,7 @@
                     <div class="panel-heading">
                         @Model.ProductsAvailable[i].ProductName
                         <i class="fa fa-eur">@Model.ProductsAvailable[i].Price</i>
+                        <label>@Model.ProductsAvailable[i].Message</label>
                         <button class="btn btn-warning disabled"><i class="fa fa-times"></i></button>
                     </div>
                 </div>
@@ -27,7 +28,8 @@
                     <div class="panel-heading">
                         @Model.ProductsAvailable[i].ProductName
                         <i class="fa fa-eur">@Model.ProductsAvailable[i].Price</i>
-                        <a href="@Url.Action("OrderVendingMachineProduct", "VendingMachine", new { vendingMachineProductId = Model.ProductsAvailable[i].VendingMachineProductId, totalAmountInserted  = Model.TotalAmountInserted })" class="btn btn-warning"><i class="fa fa-check"></i></a>
+                        <label>@Model.ProductsAvailable[i].Message</label>
+                        <a href="@Url.Action("OrderVendingMachineProduct", "VendingMachine", new {vendingMachineProductId = Model.ProductsAvailable[i].VendingMachineProductId, totalAmountInserted = Model.TotalAmountInserted})" class="btn btn-warning"><i class="fa fa-check"></i></a>
                     </div>
                 </div>
             </div>
