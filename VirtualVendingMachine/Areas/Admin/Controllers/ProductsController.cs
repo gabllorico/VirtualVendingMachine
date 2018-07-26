@@ -15,3 +15,4 @@ namespace VirtualVendingMachine.Areas.Admin.Controllers
         }
     }
 }
+

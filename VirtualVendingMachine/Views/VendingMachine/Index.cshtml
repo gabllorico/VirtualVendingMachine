@@ -1,0 +1,35 @@
+﻿@model VirtualVendingMachine.Data.DTO.ProductsAvailableDto
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Vending Machine</h2>
+<div class="row">
+    @for (var i = 0; i < Model.ProductsAvailable.Count; i++)
+    {
+        if (Model.ProductsAvailable[i].Available == false)
+        {
+            <div class="col-md-4">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        @Model.ProductsAvailable[i].ProductName
+                        <i class="fa fa-eur">@Model.ProductsAvailable[i].Price</i>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-4">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        @Model.ProductsAvailable[i].ProductName
+                        <i class="fa fa-eur">@Model.ProductsAvailable[i].Price</i>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@{ Html.RenderAction("CoinListPartial"); }

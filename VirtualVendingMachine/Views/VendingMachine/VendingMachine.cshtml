@@ -1,0 +1,109 @@
+﻿@model VirtualVendingMachine.Data.DTO.ProductsAvailableDto
+@{
+    ViewBag.Title = "VendingMachine";
+    
+}
+
+<h2>Vending Machine</h2>
+<div class="row">
+    @for (var i = 0; i < Model.ProductsAvailable.Count; i++)
+    {
+        if (Model.ProductsAvailable[i].Available == false)
+        {
+            <div class="col-md-4">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        @Model.ProductsAvailable[i].ProductName
+                        <i class="fa fa-eur">@Model.ProductsAvailable[i].Price</i>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-4">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        @Model.ProductsAvailable[i].ProductName
+                        <i class="fa fa-eur">@Model.ProductsAvailable[i].Price</i>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<div class="row">
+    <label>Amount : </label><label>@Model.TotalAmountInserted</label>
+</div>
+
+@{ Html.RenderAction("CoinListPartial"); }
+
+<script>
+    var coinsInserted =[];
+
+    @foreach (var d in Model.CoinsInserted)
+    {
+        @:coinsInserted.push(@d);
+    }
+
+    function insertCoin(currencyId) {
+        var count = coinsInserted.length;
+
+        if (count === 0) {
+            var dataNew = {
+                CurrencyId: currencyId,
+                Pieces: 1
+
+            };
+            coinsInserted.push(dataNew);
+            $.ajax({
+                url: '@Url.Action("VendingMachine", "VendingMachine")',
+                type: 'POST',
+                data: {
+                    dto : coinsInserted
+                }
+            });
+        } else {
+            var index = findIndex(currencyId);
+
+            if (index >= 0) {
+                coinsInserted[index].Pieces = coinsInserted[index].Pieces + 1;
+                $.ajax({
+                    url: '@Url.Action("VendingMachine", "VendingMachine")',
+                    type: 'POST',
+                    data: {
+                        dto: coinsInserted
+                    }
+                });
+            } else {
+                var data = {
+                    CurrencyId: currencyId,
+                    Pieces: 1
+
+                };
+                coinsInserted.push(data);
+                $.ajax({
+                    url: '@Url.Action("VendingMachine", "VendingMachine")',
+                    type: 'POST',
+                    data: {
+                        dto: coinsInserted
+                    }
+                });
+            }
+
+        }
+    }
+    
+    function findIndex(currencyId) {
+        var i = 0;
+        var count = coinsInserted.length;
+        for (i = 0; i < count; i++) {
+            if (currencyId === coinsInserted[i].CurrencyId) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+</script>
