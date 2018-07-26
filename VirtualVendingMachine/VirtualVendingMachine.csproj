@@ -303,6 +303,7 @@
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Coins\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Coins\AddCoins.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\AddProducts.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

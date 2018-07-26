@@ -13,6 +13,11 @@ namespace VirtualVendingMachine.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public ActionResult AddProducts()
+        {
+            return View();
+        }
     }
 }
 
