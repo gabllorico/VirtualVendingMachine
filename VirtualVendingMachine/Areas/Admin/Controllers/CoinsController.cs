@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using ShortBus;
+using VirtualVendingMachine.Data.Commands;
 using VirtualVendingMachine.Data.DTO;
 using VirtualVendingMachine.Data.Queries;
 
@@ -28,7 +29,15 @@ namespace VirtualVendingMachine.Areas.Admin.Controllers
 
         public ActionResult Add(CoinsWithPiecesDto dto)
         {
-            var x = dto;
+            var request = _mediator.Request(new AddCoinsCommand
+            {
+                CoinsWithPieces = dto
+            });
+
+            if (request.Data)
+                TempData["NotificationMessage"] = "Successfully Added Coins";
+            else
+                TempData["NotificationMessage"] = "Something Went Wrong With Adding of Coins";
             return RedirectToAction("Index");
         }
     }
